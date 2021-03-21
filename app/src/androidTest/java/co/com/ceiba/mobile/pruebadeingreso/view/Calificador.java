@@ -12,11 +12,13 @@ import android.view.ViewParent;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import co.com.ceiba.mobile.pruebadeingreso.R;
+import co.com.ceiba.mobile.pruebadeingreso.bd.UserBD;
 
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
@@ -53,6 +55,11 @@ public class Calificador {
                         && view.equals(((ViewGroup) parent).getChildAt(position));
             }
         };
+    }
+    @Before
+    public void init() throws InterruptedException {
+        if (UserBD.getUsersBD(mActivityTestRule.getActivity().getApplicationContext()).isEmpty())
+            Thread.sleep(4000);
     }
 
     @Test
